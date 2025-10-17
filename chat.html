@@ -1,22 +1,39 @@
 <html>
 <script type='text/javascript'>
-	function initEmbeddedMessaging() {
-		try {
-			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+    function initEmbeddedMessaging() {
+    try {
+        
+        embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
 
-			embeddedservice_bootstrap.init(
-				'00D5t0000008hRR',
-				'Messaging_Embedded_Service_Community',
-				'https://ballgroup--uat.sandbox.my.site.com/ESWMessagingEmbeddedSer1758546984453',
-				{
-					scrt2URL: 'https://ballgroup--uat.sandbox.my.salesforce-scrt.com'
-				}
-			);
-		} catch (err) {
-			console.error('Error loading Embedded Messaging: ', err);
-		}
-	};
-</script>
-<script type='text/javascript' src='https://ballgroup--uat.sandbox.my.site.com/ESWMessagingEmbeddedSer1758546984453/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+        window.addEventListener("onEmbeddedMessagingReady", () => 
+        {
+            console.log("Received the onEmbeddedMessagingReady event…");
+
+            // Send token to Salesforce
+    
+            embeddedservice_bootstrap.userVerificationAPI.setIdentityToken
+            ({
+            identityTokenType : "JWT", 
+
+            //identityToken :"{The JWT token key value that we created in Stage 4}"
+            identityToken :"eyJraWQiOiIxMjM0NSIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJ0ZXN0SXNzdWVyIiwic3ViIjoidXNlcjEiLCJleHAiOjE3NjA3MTQzMTYsImlhdCI6MTc2MDcwODMxNn0.e_BV2SnWwfBzRBtsEorg-A6Xj223Y2wfOr0MiprJkqBl9LYhvVBGgBUWA-W91fat4fa6OUGN8hbjXbOYJQLHP3irKh_Y-V2kX3Wp7MQto7G-aHczDFICHLlxUYw5awC_ESjFHyLrwZ_wfcBtTCxjODbBLBSirHIZvncJezMNNDaAITt3Z5r_fE7Jj_kBZOVxd5x8R8-zTAVKD3wWNV7oYffgKbqev1YN9K0qifVIMop8gX93aHDQszpCeKvTC59TyRDn8rIWqyrQawNuopcZlY_FkoGIV7sOLyZfyD1HLxE9Z9t3GXwg7rSl08BCy1fcv5ayFT2gtOtZa47w-n0feQ"
+            });
+        });
+
+         embeddedservice_bootstrap.init(
+                '00D5t0000008hRR',
+                'Messaging_Setting_Community',
+                'https://ballgroup--uat.sandbox.my.site.com/ESWMessagingSettingComm1758546849128',
+                {
+                    scrt2URL: 'https://ballgroup--uat.sandbox.my.salesforce-scrt.com'
+                }
+            );
+        } 
+    catch (err) {
+            console.error('Error loading Embedded Messaging: ', err);
+        }
+    };
+   </script>
+<script type='text/javascript' src='https://ballgroup--uat.sandbox.my.site.com/ESWMessagingSettingComm1758546849128/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>  
 
 </html>
